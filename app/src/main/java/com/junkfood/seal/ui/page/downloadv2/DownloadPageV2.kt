@@ -600,6 +600,7 @@ private fun HeaderExpanded(modifier: Modifier = Modifier) {
 
 @Composable
 fun FABs(modifier: Modifier = Modifier, downloadCallback: () -> Unit = {}) {
+    val expanded = LocalWindowWidthState.current != WindowWidthSizeClass.Compact
     Column(modifier = modifier.padding(6.dp), horizontalAlignment = Alignment.End) {
         ExtendedFloatingActionButton(
             onClick = downloadCallback,
@@ -610,7 +611,7 @@ fun FABs(modifier: Modifier = Modifier, downloadCallback: () -> Unit = {}) {
                 )
             },
             text = { Text(stringResource(R.string.download)) },
-            expanded = true,
+            expanded = expanded,
             modifier = Modifier.padding(vertical = 12.dp),
         )
     }

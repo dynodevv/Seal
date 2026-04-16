@@ -550,6 +550,7 @@ fun Header(modifier: Modifier = Modifier, onMenuOpen: () -> Unit = {}) {
 
 @Composable
 private fun HeaderCompact(modifier: Modifier = Modifier, onMenuOpen: () -> Unit) {
+
     Row(modifier = modifier.height(64.dp), verticalAlignment = Alignment.CenterVertically) {
         IconButton(onClick = onMenuOpen, modifier = Modifier) {
             Icon(

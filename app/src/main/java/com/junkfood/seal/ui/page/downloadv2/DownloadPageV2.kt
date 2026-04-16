@@ -38,9 +38,10 @@ import androidx.compose.material.icons.outlined.FileDownload
 import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconButton
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -350,7 +351,7 @@ fun DownloadPageImplV2(
 
     Scaffold(
         modifier = modifier.fillMaxSize().statusBarsPadding(),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
         floatingActionButton = { FABs(modifier = Modifier, downloadCallback = downloadCallback) },
     ) { windowInsetsPadding ->
         val lazyListState = rememberLazyGridState()
@@ -559,14 +560,22 @@ private fun HeaderCompact(modifier: Modifier = Modifier, onMenuOpen: () -> Unit)
             )
         }
         Spacer(modifier = Modifier.width(4.dp))
-        Text(
-            stringResource(R.string.download_queue),
-            style =
-                MaterialTheme.typography.titleLarge.copy(
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Medium,
-                ),
-        )
+        Column(verticalArrangement = Arrangement.Center) {
+            Text(
+                stringResource(R.string.download_queue),
+                style =
+                    MaterialTheme.typography.headlineSmall.copy(
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.SemiBold,
+                    ),
+            )
+            Text(
+                text = stringResource(R.string.download_hint),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 1,
+            )
+        }
     }
 }
 
@@ -574,10 +583,18 @@ private fun HeaderCompact(modifier: Modifier = Modifier, onMenuOpen: () -> Unit)
 private fun HeaderExpanded(modifier: Modifier = Modifier) {
     Row(modifier = modifier.height(64.dp), verticalAlignment = Alignment.CenterVertically) {
         Spacer(modifier = Modifier.width(4.dp))
-        Text(
-            stringResource(R.string.download_queue),
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Medium),
-        )
+        Column(verticalArrangement = Arrangement.Center) {
+            Text(
+                stringResource(R.string.download_queue),
+                style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.SemiBold),
+            )
+            Text(
+                text = stringResource(R.string.download_hint),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 1,
+            )
+        }
     }
     Spacer(Modifier.height(4.dp))
 }
@@ -586,25 +603,16 @@ private fun HeaderExpanded(modifier: Modifier = Modifier) {
 fun FABs(modifier: Modifier = Modifier, downloadCallback: () -> Unit = {}) {
     val expanded = LocalWindowWidthState.current != WindowWidthSizeClass.Compact
     Column(modifier = modifier.padding(6.dp), horizontalAlignment = Alignment.End) {
-        FloatingActionButton(
+        ExtendedFloatingActionButton(
             onClick = downloadCallback,
-            content = {
-                if (expanded) {
-                    Row(
-                        modifier = Modifier.widthIn(min = 80.dp).padding(horizontal = 16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(Icons.Outlined.FileDownload, contentDescription = null)
-                        Spacer(Modifier.width(12.dp))
-                        Text(stringResource(R.string.download))
-                    }
-                } else {
-                    Icon(
-                        Icons.Outlined.FileDownload,
-                        contentDescription = stringResource(R.string.download),
-                    )
-                }
+            icon = {
+                Icon(
+                    Icons.Outlined.FileDownload,
+                    contentDescription = stringResource(R.string.download),
+                )
             },
+            text = { Text(stringResource(R.string.download)) },
+            expanded = expanded,
             modifier = Modifier.padding(vertical = 12.dp),
         )
     }
@@ -696,10 +704,10 @@ fun SubHeader(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        FilledIconButton(
+        FilledTonalIconButton(
             onClick = onToggleView,
             modifier = Modifier.clearAndSetSemantics {}.size(32.dp),
-            colors = IconButtonDefaults.filledIconButtonColors(containerColor = containerColor),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(containerColor = containerColor),
         ) {
             Icon(
                 imageVector =
@@ -711,10 +719,10 @@ fun SubHeader(
 
         Spacer(Modifier.width(4.dp))
 
-        FilledIconButton(
+        FilledTonalIconButton(
             onClick = onShowMenu,
             modifier = Modifier.clearAndSetSemantics {}.size(32.dp),
-            colors = IconButtonDefaults.filledIconButtonColors(containerColor = containerColor),
+            colors = IconButtonDefaults.filledTonalIconButtonColors(containerColor = containerColor),
         ) {
             Icon(
                 imageVector = Icons.Outlined.MoreVert,

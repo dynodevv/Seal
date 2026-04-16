@@ -91,7 +91,7 @@ fun NavigationDrawer(
                 gesturesEnabled = gesturesEnabled,
                 drawerState = drawerState,
                 drawerContent = {
-                    ModalDrawerSheet(drawerState = drawerState, modifier = modifier.width(360.dp)) {
+                    ModalDrawerSheet(drawerState = drawerState, modifier = modifier.width(340.dp)) {
                         NavigationDrawerSheetContent(
                             modifier = Modifier,
                             currentRoute = currentRoute,
@@ -110,7 +110,7 @@ fun NavigationDrawer(
                 gesturesEnabled = drawerState.isOpen,
                 drawerState = drawerState,
                 drawerContent = {
-                    ModalDrawerSheet(drawerState = drawerState, modifier = modifier.width(360.dp)) {
+                    ModalDrawerSheet(drawerState = drawerState, modifier = modifier.width(340.dp)) {
                         NavigationDrawerSheetContent(
                             modifier = Modifier,
                             currentRoute = currentRoute,
@@ -124,7 +124,7 @@ fun NavigationDrawer(
             ) {
                 Row {
                     Surface(
-                        color = MaterialTheme.colorScheme.surfaceContainer,
+                        color = MaterialTheme.colorScheme.surfaceContainerLow,
                         modifier = Modifier.zIndex(1f),
                     ) {
                         Column(
@@ -315,10 +315,10 @@ fun NavigationRailItemVariant(
     Box(
         modifier =
             modifier
-                .size(56.dp)
+                    .size(60.dp)
                 .clip(MaterialTheme.shapes.large)
                 .background(
-                    if (selected) MaterialTheme.colorScheme.secondaryContainer
+                    if (selected) MaterialTheme.colorScheme.tertiaryContainer
                     else Color.Transparent
                 )
                 .selectable(selected = selected, onClick = onClick),
@@ -326,7 +326,7 @@ fun NavigationRailItemVariant(
     ) {
         CompositionLocalProvider(
             LocalContentColor provides
-                if (selected) MaterialTheme.colorScheme.onSecondaryContainer
+                if (selected) MaterialTheme.colorScheme.onTertiaryContainer
                 else MaterialTheme.colorScheme.onSurfaceVariant
         ) {
             icon()

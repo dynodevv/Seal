@@ -239,6 +239,8 @@ fun VideoCardV2(
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = containerColor),
+        shape = MaterialTheme.shapes.large,
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
         Column {
             Box(Modifier.fillMaxWidth()) {
@@ -304,6 +306,7 @@ private fun CardImage(modifier: Modifier = Modifier, thumbnailModel: Any? = null
                     .fillMaxWidth()
                     .aspectRatio(16f / 9f, matchHeightConstraintsFirst = true),
             color = MaterialTheme.colorScheme.surfaceContainerHighest,
+            shape = MaterialTheme.shapes.medium,
         ) {}
     }
 }
@@ -366,7 +369,7 @@ private fun VideoInfoLabel(modifier: Modifier = Modifier, duration: Int, fileSiz
     Surface(
         modifier = modifier.padding(4.dp),
         color = LabelContainerColor,
-        shape = MaterialTheme.shapes.extraSmall,
+        shape = MaterialTheme.shapes.small,
     ) {
         val fileSizeText = fileSizeApprox.toFileSizeText()
         val durationText = duration.toDurationText()
@@ -384,7 +387,7 @@ fun CardStateIndicator(modifier: Modifier = Modifier, downloadState: Task.Downlo
     Surface(
         modifier = modifier.padding(vertical = 12.dp, horizontal = 8.dp),
         color = LabelContainerColor,
-        shape = MaterialTheme.shapes.extraSmall,
+        shape = MaterialTheme.shapes.small,
     ) {
         CardItemStateText(
             modifier = Modifier.padding(horizontal = 4.dp),
